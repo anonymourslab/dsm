@@ -7,7 +7,7 @@ This repository contains the complete, reproducible implementation for the paper
 
 **"DSM: A Lifecycle-Aware Storage Architecture for Gas-Efficient Time-Series Smart Contracts"**
 
-## 📋 Claims Verified by This Code
+## 📋 Experiments
 
 | Claim | Verification Method | Expected Result |
 |-------|---------------------|-----------------|
@@ -18,7 +18,7 @@ This repository contains the complete, reproducible implementation for the paper
 | 5× reduction in streaming migration gas | `forge test --match-test test_StreamingSimulation` | DSM ~118M vs Array ~642M |
 | 25-test suite passes | `forge test --match-contract DSMTest` | All 25 tests pass (10 unit, 6 edge, 5 stress, 4 security) |
 
-## 🚀 Quick Start for Reviewers
+## 🚀 Quick Start for reproducibility
 
 ### Prerequisites
 
@@ -233,7 +233,7 @@ The oracle implementation includes:
 | 80,000 | 135,600,420† | 4.11×10^12† (OOG) | 30,299×† |
 | 100,000 | 166,727,766 | >6.4×10^12† (OOG) | >38,000×† |
 
-† Extrapolated theoretical values based on linear complexity of DSM and quadratic complexity of array baseline.
+† Extrapolated theoretical values based on the linear complexity of DSM and the quadratic complexity of the array baseline.
 
 ## 📊 Streaming Simulation Results (5,000 records for DSM & Mapping-only, 1,000 for Array baseline)
 
@@ -282,10 +282,10 @@ If you encounter `panic: arithmetic underflow or overflow (0x11)` errors during 
 **ArrayBaseline.sol:**
 - Fixed `_removeElement` loop condition: Changed from `i < arr.length - 1` to `i + 1 < arr.length` to prevent underflow when array is empty
 - Fixed `migrateData` index decrement: Added check `if (i > 0) i--` to prevent underflow when `i = 0`
-- Fixed `batchStoreData` timestamp calculation: Added conditional check similar to DSM
+- Fixed `batchStoreData` timestamp calculation: Added a conditional check similar to DSM
 
 **MappingOnly.sol:**
-- Fixed `batchStoreData` timestamp calculation: Added conditional check similar to DSM
+- Fixed `batchStoreData` timestamp calculation: Added a conditional check similar to DSM
 
 **GasBenchmark.t.sol:**
 - Added conditional checks in test assertions to handle cases where DSM gas might be higher than baseline gas
