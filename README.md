@@ -31,7 +31,7 @@ foundryup
 pip install web3 requests scipy pandas numpy
 
 # Clone the repository
-git clone https://github.com/TakudzwaChoto/DSM.git
+git clone https://github.com/anonymourslab/dsm.git
 
 # Install Foundry dependencies
 forge install
